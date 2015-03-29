@@ -9,7 +9,7 @@ var PORT = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3080;
 console.log( 'PORT' + process.env.OPENSHIFT_NODEJS_PORT );
 console.log( 'IP' + process.env.OPENSHIFT_NODEJS_IP );
 
-var server = http.createServer(function ( req, res ){
+http.createServer(function ( req, res ){
 	console.log( 'request' );
 	res.end( 'Server running at: ' + PROTOCOL + '://' + HOST + ': ' + PORT + ' - worker id: ' + process.pid );
 })
