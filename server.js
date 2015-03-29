@@ -22,7 +22,7 @@ var SampleApp = function() {
     };
 
     self.populateCache = function() {
-        if (typeof self.zcache === 'undefined') {
+        if ( typeof self.zcache === 'undefined' ) {
             self.zcache = { 'index.html': '' };
         }
 
@@ -34,10 +34,10 @@ var SampleApp = function() {
 
     self.terminator = function( sig ){
         if ( typeof sig === 'string' ){
-           console.log('%s: Received %s - terminating sample app ...', Date(Date.now()), sig);
+           console.log('%s: Received %s - terminating sample app ...', Date( Date.now() ), sig);
            process.exit(1);
         }
-        console.log('%s: Node server stopped.', Date(Date.now()) );
+        console.log('%s: Node server stopped.', Date( Date.now() ) );
     };
 
     self.setupTerminationHandlers = function(){
@@ -55,16 +55,19 @@ var SampleApp = function() {
  */
 
     self.createRoutes = function() {
-        self.routes = { };
+        self.routes = { };	
 
         self.routes['/asciimo'] = function(req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
 
-        self.routes['/'] = function(req, res) {
+        self.routes['/'] = function ( req, res ){
+
+        	console.log( 'request: ' + req );
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            res.send( self.cache_get('index.html') );
+
         };
     };
 
@@ -74,7 +77,7 @@ var SampleApp = function() {
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
+            self.app.get( r, self.routes[r] );
         }
     };
 
