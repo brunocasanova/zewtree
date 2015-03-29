@@ -36,7 +36,7 @@ var server = function() {
 		self.app = express();
 
 		//  Add handlers for the app (from the routes).
-		for( var r in self.routes) {
+		for( var r in self.routes ){
 			self.app.get( r, self.routes[r] );
 		}
 	};
