@@ -54,7 +54,7 @@ var server = function() {
 
 		self.routes['/'] = function ( req, res ){
 
-			console.log('%s: Received %s - request: ' + req.connection.remoteAddress , Date( Date.now() ), sig );
+			console.log('%s: Received %s - request: ' + req.connection.remoteAddress , Date( Date.now() ) );
 		
 			res.setHeader( 'Content-Type', 'text/html' );
 			res.send( self.cache_get('index.html') );
