@@ -3,17 +3,17 @@
 var express = require( 'express' );
 var fs = require('fs');
 
-var server = function() {
+var server = function(){
 
 	//DEFINE
 
 	var self = this;
 
-	self.setupVariables = function() {
+	self.setupVariables = function(){
 		self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 		self.port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-		if ( typeof self.ipaddress === 'undefined' ) {
+		if ( typeof self.ipaddress === 'undefined' ){
 			console.warn( 'No OPENSHIFT_NODEJS_IP var, using 127.0.0.1' );
 			self.ipaddress = "127.0.0.1";
 		};
@@ -22,7 +22,7 @@ var server = function() {
 
 	//SERVER
 
-	self.initialize = function() {
+	self.initialize = function(){
 		self.setupVariables();
 		self.populateCache();
 		self.setupTerminationHandlers();
@@ -31,7 +31,7 @@ var server = function() {
 		self.initializeServer();
 	};
 
-	self.initializeServer = function() {
+	self.initializeServer = function(){
 		self.createRoutes();
 		self.app = express();
 
@@ -41,15 +41,15 @@ var server = function() {
 		}
 	};
 
-	self.start = function() {
-		self.app.listen(self.port, self.ipaddress, function() {
+	self.start = function(){
+		self.app.listen(self.port, self.ipaddress, function(){
 			console.log('%s: Node server started on %s:%d ...', Date(Date.now() ), self.ipaddress, self.port );
 		});
 	};
 
 	//ROUTES
 	
-	self.createRoutes = function() {
+	self.createRoutes = function(){
 		self.routes = {};	
 
 		self.routes['/'] = function ( req, res ){
@@ -57,15 +57,15 @@ var server = function() {
 			console.log('%s: Received %s - request: ' + req.connection.remoteAddress , Date( Date.now() ) );
 		
 			res.setHeader( 'Content-Type', 'text/html' );
-			res.send( self.cache_get('index.html') );
+			res.send( self.cache_get( 'index.html' ) );
 
 		};
 	};
 
 	//CACHE
 
-	self.populateCache = function() {
-		if ( typeof self.zcache === 'undefined' ) {
+	self.populateCache = function(){
+		if ( typeof self.zcache === 'undefined' ){
 			self.zcache = { 'index.html': '' };
 		}
 
@@ -73,7 +73,7 @@ var server = function() {
 		self.zcache['index.html'] = fs.readFileSync('./index.html');
 	};
 
-	self.cache_get = function( key ) { return self.zcache[key]; };
+	self.cache_get = function( key ){ return self.zcache[key]; };
 
 	//TERMINATE
 
@@ -86,12 +86,12 @@ var server = function() {
 	};
 
 	self.setupTerminationHandlers = function(){
-		process.on('exit', function() { self.terminator(); });
+		process.on('exit', function(){ self.terminator(); });
 
 		['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
 		 'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
 		].forEach(function ( element, index, array ){
-			process.on( element, function() { self.terminator( element ); });
+			process.on( element, function(){ self.terminator( element ); });
 		});
 	};
 
