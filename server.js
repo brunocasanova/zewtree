@@ -1,7 +1,7 @@
 #!/bin/env node
 
 var express = require( 'express' );
-var fs = require('fs');
+var fs = require( 'fs' );
 
 var server = function(){
 
@@ -13,7 +13,7 @@ var server = function(){
 		self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 		self.port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-		if ( typeof self.ipaddress === 'undefined' ){
+		if( typeof self.ipaddress === 'undefined' ){
 			console.warn( 'No OPENSHIFT_NODEJS_IP var, using 127.0.0.1' );
 			self.ipaddress = "127.0.0.1";
 		};
@@ -65,7 +65,7 @@ var server = function(){
 	//CACHE
 
 	self.populateCache = function(){
-		if ( typeof self.zcache === 'undefined' ){
+		if( typeof self.zcache === 'undefined' ){
 			self.zcache = { 'index.html': '' };
 		}
 
@@ -78,7 +78,7 @@ var server = function(){
 	//TERMINATE
 
 	self.terminator = function( sig ){
-		if ( typeof sig === 'string' ){
+		if( typeof sig === 'string' ){
 		   console.log('%s: Received %s - terminating zewtree ...', Date( Date.now() ), sig );
 		   process.exit( 1 );
 		}
