@@ -1,5 +1,5 @@
 var chai = require('chai');
-chai.should()
+chai.should();
 
 describe('chai', function(){
 	it( 'should fail when asserting false', function(){
