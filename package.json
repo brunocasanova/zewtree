@@ -2,7 +2,7 @@
   "name": "zewtree",
   "version": "0.0.1",
   "description": "Project to make a few tests with clusters...",
-  "main": "lib/server.js",
+  "main": "lib/cluster.js",
   "scripts": {
     "start": "ENV='dev' nodemon server.js",
     "test": "mocha"
