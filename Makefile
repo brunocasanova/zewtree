@@ -72,10 +72,10 @@ deploy-origin: deploy-msg status commit-add commit-remove commit push-origin log
 deploy-msg: ;@echo "${ZEWTREE_LOG} \x1b[31m[DEPLOY]\x1b[0m initialized!"; \
 
 push-origin: ;@echo "${ZEWTREE_LOG} \x1b[31m[GIT][PUSH][ORIGIN]\x1b[0m push to origin..."; \
-	git push origin master
+	git push origin master -f
 
 push-upstream: ;@echo "${ZEWTREE_LOG} \x1b[31m[GIT][PUSH][UPSTREAM]\x1b[0m push to Production..."; \
-	git push upstream master
+	git push upstream master -f
 
 commit-add: ;@echo "${ZEWTREE_LOG} \x1b[31m[GIT][ADD]\x1b[0m files to stack..."; \
 	git add .
